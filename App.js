@@ -47,12 +47,7 @@ const styles = StyleSheet.create({
 		paddingTop: 60,
 		paddingHorizontal: 16,
 	},
-
 	goalsContainer: {
 		flex: 5,
-	},
-
-	goalText: {
-		color: "white",
 	},
 });
