@@ -9,10 +9,16 @@ export default function App() {
 	const [courseGoals, setCourseGoals] = useState([]);
 
 	const addGoalHandler = (enteredGoalText) => {
-		setCourseGoals((prev) => [
-			...prev,
+		setCourseGoals((currentCourseGoals) => [
+			...currentCourseGoals,
 			{ text: enteredGoalText, id: Math.random().toString() },
 		]);
+	};
+
+	const deleteGoalHandler = (id) => {
+		setCourseGoals((currentCourseGoals) => {
+			return currentCourseGoals.filter((goal) => goal.id !== id);
+		});
 	};
 
 	return (
@@ -22,7 +28,11 @@ export default function App() {
 				<FlatList
 					data={courseGoals}
 					renderItem={(itemData) => (
-						<GoalItem text={itemData.item.text} />
+						<GoalItem
+							text={itemData.item.text}
+							id={itemData.item.id}
+							onDeleteItem={deleteGoalHandler}
+						/>
 					)}
 					keyExtractor={(item, index) => item.id}
 				/>
@@ -37,12 +47,7 @@ const styles = StyleSheet.create({
 		paddingTop: 60,
 		paddingHorizontal: 16,
 	},
-
 	goalsContainer: {
 		flex: 5,
-	},
-
-	goalText: {
-		color: "white",
 	},
 });
